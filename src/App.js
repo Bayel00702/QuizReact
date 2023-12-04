@@ -69,10 +69,28 @@ function App() {
     },
   ]
 
+
+    const [step, setStep] = useState(0)
+    const [correct, setCorrect] = useState(0)
+    const question = questions[step]
+
+    const clickVar = (idx) => {
+
+        setStep(step + 1)
+        if (idx === question.correct){
+            setCorrect(correct + 1)
+        }
+    }
+
   return (
     <div className="App">
-        <Game/>
-        {/*<Result/>*/}
+        {
+            step !== questions.length ?
+                <Game questions={questions} question={question} clickVar={clickVar} step={step} />
+                :
+                <Result questions={questions} correct={correct}/>
+
+        }
     </div>
   );
 }

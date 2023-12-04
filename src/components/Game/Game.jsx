@@ -1,16 +1,38 @@
 import React from 'react';
 
-const Game = () => {
+const Game = ({question, clickVar, step, questions}) => {
+
+    const progress = Math.round((step / questions.length * 100))
+
+    console.log(progress)
     return (
         <div className='game'>
-            <h2 className="game__title">Title</h2>
 
-            <ul className="game__list">
-                <li className="game__item">1</li>
-                <li className="game__item">2</li>
-                <li className="game__item">3</li>
-                <li className="game__item">4</li>
-            </ul>
+            <div className="game__progress">
+                <div style={{width: `${progress}%`}} className="game__progress-lenght"></div>
+            </div>
+
+
+            <div className="game__test">
+
+                <h2 className="game__title">{question.title}</h2>
+
+                <ul className="game__list">
+                    {
+                        question.variants.map((item, idx) => (
+                            <li
+                                key={item}
+                                className="game__item"
+                                onClick={() => clickVar(idx)}
+                            >
+                                {item}
+                            </li>
+                        ))
+                    }
+                </ul>
+
+                <button className="game__btn">Continue</button>
+            </div>
         </div>
     );
 };
